@@ -7,7 +7,7 @@ export default defineConfig({
   base: process.env.VITE_BASE_URL || '/react-book-app',
   server: {
     proxy: {
-      '/api': 'http://localhost:8000',
+      '/api': 'https://django-book-app-in0m.onrender.com',
     },
   },
 });
