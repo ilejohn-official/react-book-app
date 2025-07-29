@@ -18,7 +18,7 @@ function App() {
     setLoading(true)
     setError('')
     try {
-      const res = await fetch(`${API_URL}/api/books`)
+      const res = await fetch(`${API_URL}/api/books/`)
       if (!res.ok) throw new Error('Failed to fetch books')
       const data = await res.json()
       setBooks(data)
@@ -43,7 +43,7 @@ function App() {
     e.preventDefault()
     setError('')
     try {
-      const res = await fetch(`${API_URL}/api/books/create`, {
+      const res = await fetch(`${API_URL}/api/books/create/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
