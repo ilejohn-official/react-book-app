@@ -11,12 +11,14 @@ function App() {
   const [editingId, setEditingId] = useState(null)
   const [editForm, setEditForm] = useState({ title: '', release_year: '', description: '' })
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
   // Fetch books from backend
   const fetchBooks = async () => {
     setLoading(true)
     setError('')
     try {
-      const res = await fetch('/api/books/')
+      const res = await fetch(`${API_URL}/api/books`)
       if (!res.ok) throw new Error('Failed to fetch books')
       const data = await res.json()
       setBooks(data)
@@ -41,7 +43,7 @@ function App() {
     e.preventDefault()
     setError('')
     try {
-      const res = await fetch('/api/books/create/', {
+      const res = await fetch(`${API_URL}/api/books/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -77,7 +79,7 @@ function App() {
     e.preventDefault()
     setError('')
     try {
-      const res = await fetch(`/api/books/${editingId}/`, {
+      const res = await fetch(`${API_URL}/api/books/${editingId}/`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(editForm),
@@ -105,7 +107,7 @@ function App() {
     if (!window.confirm('Delete this book?')) return
     setError('')
     try {
-      const res = await fetch(`/api/books/${id}/`, { method: 'DELETE' })
+      const res = await fetch(`${API_URL}/api/books/${id}/`, { method: 'DELETE' })
       if (!res.ok) throw new Error('Failed to delete book')
       fetchBooks()
     } catch (err) {

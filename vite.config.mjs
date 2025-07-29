@@ -5,9 +5,4 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   base: process.env.VITE_BASE_URL || '/react-book-app',
-  server: {
-    proxy: {
-      '/api': 'https://django-book-app-in0m.onrender.com',
-    },
-  },
 });
